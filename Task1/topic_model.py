@@ -147,11 +147,11 @@ class YelpReviewsLDA:
     def generate_word_cloud(self, topics):
         cols = [color for name, color in mcolors.TABLEAU_COLORS.items()]
         cloud = WordCloud(background_color='white',
-                      width=2500,
-                      height=1800,
-                      max_words=10,
-                      colormap='tab10',
-                      prefer_horizontal=1.0)
+                          width=2500,
+                          height=1800,
+                          max_words=10,
+                          colormap='tab10',
+                          prefer_horizontal=1.0)
         # NOTE: Change the size of graph matrix based on number of topics
         fig, axes = plt.subplots(5, 2, figsize=(10, 10), sharex=True, sharey=True)
 

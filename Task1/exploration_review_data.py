@@ -13,8 +13,12 @@ class YelpReviewsAnalysis:
     def __init__(self, input_file, output_file, header):
         self.path = os.path.join(os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir)),
                                  'data')
-        self.output_path = os.path.join(os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir)),
-                                 'output')
+        self.dir_path = os.path.join(
+            os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir)),
+            )
+        self.output_path = os.path.join(
+            os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), os.pardir)),
+            'output')
         self.input_file = input_file
         self.output_file = output_file
         self.header = header
@@ -73,7 +77,7 @@ class YelpReviewsAnalysis:
 
         doc = metapy.index.Document()
         doc.content(complete_set)
-        tokens = self.build_collection(doc, self.path, 'stopwords.txt')
+        tokens = self.build_collection(doc, self.dir_path, 'stopwords.txt')
 
         all_words = nltk.FreqDist(tokens)
         string = ''
