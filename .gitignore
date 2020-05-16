@@ -1,0 +1,8 @@
+output
+venv
+data
+*.iml
+meta
+.idea
+task1PythonTools
+__pycache__
