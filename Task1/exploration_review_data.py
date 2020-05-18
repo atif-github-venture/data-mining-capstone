@@ -124,8 +124,8 @@ def main():
     header = ['votes.funny', 'votes.useful', 'votes.cool', 'user_id', 'review_id', 'stars', 'date', 'text', 'type',
               'business_id']
     ra = YelpReviewsAnalysis(input_file, output_file, header)
-    # ra.transform_review_data()    #uncomment this line to use the json to csv transformation for reviews file.
-    # ra.generate_collection_corpus()       #Uncomment this line to generate the word frequency
+    # ra.transform_review_data()    # uncomment this line to use the json to csv transformation for reviews file.
+    # ra.generate_collection_corpus()       # Uncomment this line to generate the word frequency
     ra.star_to_attributes()
     en_time = datetime.datetime.now()
     print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))

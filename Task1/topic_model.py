@@ -5,13 +5,15 @@ from collections import Counter
 from plotly.graph_objs import *
 import pandas
 from plotly.graph_objs import graph_objs
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import NMF
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
 from gensim.models.ldamodel import LdaModel
 from gensim import matutils
 from matplotlib import pyplot as plt
 from wordcloud import WordCloud
 import matplotlib.colors as mcolors
 from utils import read_json_content
+from sklearn.preprocessing import normalize as sk_learn_normalize
 
 
 def normalize(values):
@@ -144,6 +146,35 @@ class YelpReviewsLDA:
         self.generate_word_cloud(topics)
         self.word_count_per_topic(topics)
 
+    def plsa(self):
+        K_clusters = self.num_of_topics
+        vectorizer = TfidfVectorizer(max_df=0.5, max_features=self.num_of_features,
+                                     min_df=2, stop_words='english',
+                                     use_idf=True)
+
+        dataset = pandas.read_csv(self.path + '/' + self.input_file)
+        dataset = dataset[dataset['text'].notnull()]
+        self.text = dataset['text']
+        # self.text = self.text[:5000]
+
+        print("Extracting features from the training dataset using a sparse vectorizer")
+        X = vectorizer.fit_transform(self.text)
+        print("n_samples: %d, n_features: %d" % X.shape)
+
+        transformer = TfidfTransformer(smooth_idf=False)
+        x_tfidf = transformer.fit_transform(X)
+        xtfidf_norm = sk_learn_normalize(x_tfidf, norm='l1', axis=1)
+        model = NMF(n_components=K_clusters, init='nndsvd')
+        model.fit(xtfidf_norm)
+        feat_names = vectorizer.get_feature_names()
+        word_dict = {}
+        for i in range(K_clusters):
+            # for each topic, obtain the largest values, and add the words they map to into the dictionary.
+            words_ids = model.components_[i].argsort()[:-self.words_per_topic - 1:-1]
+            words = [feat_names[key] for key in words_ids]
+            word_dict['Topic # ' + '{:02d}'.format(i + 1)] = words
+        print(pandas.DataFrame(word_dict))
+
     def generate_word_cloud(self, topics):
         cols = [color for name, color in mcolors.TABLEAU_COLORS.items()]
         cloud = WordCloud(background_color='white',
@@ -225,6 +256,7 @@ def main():
     # ra.lda(mode='negative')
     # For visualization of all the reviews
     ra.visualization()
+    # ra.plsa()
     en_time = datetime.datetime.now()
     print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))
 
