@@ -1,0 +1,413 @@
+name,original_label,ground_truth,correct_label,comment
+salad bar,1,False Positive,0,
+mexican food,1,False Positive,0,
+main course,1,False Positive,0,
+las vegas,1,False Positive,0,
+south indian cuisine,1,False Positive,0,
+credit card,1,False Positive,0,
+south asian,1,False Positive,0,
+chick peas,1,,1,
+chicken tikka,1,,1,
+san francisco,1,False Positive,0,
+deep fried,1,,1,
+street food,1,False Positive,0,
+flat bread,1,,1,
+tandoori chicken,1,,1,
+rogan josh,1,,1,
+comfort food,1,False Positive,0,
+fast food,1,False Positive,0,
+taj mahal,1,False Positive,0,
+gluten free,1,,1,
+mother india,1,False Positive,0,
+gulab jamun,1,,1,
+belly dancing,1,False Positive,0,
+basmati rice,1,,1,
+strip mall,1,False Positive,0,
+rice pudding,1,,1,
+south indian,1,False Positive,0,
+date night,1,False Positive,0,
+bay area,1,False Positive,0,
+hot sauce,1,,1,
+iced tea,1,,1,
+middle eastern,1,False Positive,0,
+belly dancer,1,False Positive,0,
+fried rice,1,,1,
+food court,1,False Positive,0,
+ice cream,1,,1,
+mount everest,1,False Positive,0,
+south india,1,False Positive,0,
+tomato soup,1,,1,
+indian cuisine,1,,1,
+chicken tikka masala,1,,1,
+mt everest,1,False Positive,0,
+chinese food,1,False Positive,0,
+great taste,1,False Positive,0,
+white rice,1,,1,
+tomato sauce,1,,1,
+brown rice,1,,1,
+chicken wings,1,,1,
+india gate,1,False Positive,0,
+that's not,0,,0,
+if there was,0,,0,
+a traditional,0,,0,
+hands down the best,0,,0,
+the reviews on yelp,0,,0,
+extra spicy,0,,0,
+happy and,0,,0,
+first time at,0,,0,
+amazing service,0,,0,
+so after,0,,0,
+entr e,0,,0,
+to pay the,0,,0,
+pleased with,0,,0,
+we come,0,,0,
+could have been better,0,,0,
+guru palace,0,,0,
+gets the,0,,0,
+the non veg,0,,0,
+have eaten,0,,0,
+biz photos,0,,0,
+a plus,0,,0,
+a table,0,,0,
+the lunch,0,,0,
+all excellent,0,,0,
+over priced,0,,0,
+i really like this place,0,,0,
+i'm in,0,,0,
+don't remember the,0,,0,
+thus far,0,,0,
+food is one,0,,0,
+writing this,0,,0,
+last time i,0,,0,
+and for,0,,0,
+to cook,0,,0,
+was very tasty and,0,,0,
+in my opinion,0,,0,
+decided to check,0,,0,
+was great,0,,0,
+indian restaurant and,0,,0,
+there was a,0,,0,
+of the best indian buffets,0,,0,
+to arrive and,0,,0,
+are way,0,,0,
+too small,0,,0,
+cuisine of india,0,,0,
+is bland,0,,0,
+the indian sampler,0,,0,
+not so good,0,,0,
+just moved,0,,0,
+any case,0,,0,
+to my,0,,0,
+of white,0,,0,
+the man,0,,0,
+restaurant for the,0,,0,
+dipping sauce,0,,0,
+on the menu,0,,0,
+visit this place,0,,0,
+great service,0,,0,
+it like,0,,0,
+in las,0,,0,
+in for the lunch,0,,0,
+great with,0,,0,
+not the best i've had,0,,0,
+have never,0,,0,
+with lots of,0,,0,
+the selection of,0,,0,
+well presented,0,,0,
+with our meal,0,,0,
+the naan was,0,,0,
+i will be returning,0,,0,
+i've had,0,,0,
+would be a,0,,0,
+no idea,0,,0,
+friendly staff and,0,,0,
+half an hour,0,,0,
+tikka masala,0,False Negative,1,
+place stars,0,,0,
+a bad experience,0,,0,
+we had dinner,0,,0,
+food i've ever had,0,,0,
+coconut chicken,0,False Negative,1,
+was out of,0,,0,
+at the end of,0,,0,
+recommend this place to anyone,0,,0,
+water glasses,0,,0,
+ala carte,0,,0,
+sit down,0,,0,
+the set,0,,0,
+i suppose,0,,0,
+did not disappoint,0,,0,
+for dinner and,0,,0,
+the many,0,,0,
+was flavorful and,0,,0,
+appetizer we,0,,0,
+papdi chaat,,,1,Manually added
+samosa,,,1,Manually added
+naan,,,1,Manually added
+paratha,,,1,Manually added
+masala dosa,,,1,Manually added
+raita,,,1,Manually added
+dal,,,1,Manually added
+masala chai,,,1,Manually added
+butter chicken,,,1,Manually added
+chicken tikka masala,,,1,Manually added
+saag paneer,,,1,Manually added
+vindaloo,,,1,Manually added
+rogan josh,,,1,Manually added
+aloo gobi,,,1,Manually added
+gajar halwa,,,1,Manually added
+aloo gobi,,,1,Manually added
+aloo tikki,,,1,Manually added
+aloo matar,,,1,Manually added
+aloo methi,,,1,Manually added
+aloo shimla mirch,,,1,Manually added
+amriti with rabdi,,,1,Manually added
+amritsari fish,,,1,Manually added
+amritsari�kulcha,,,1,Manually added
+baati,,,1,Manually added
+bhatura,,,1,Manually added
+bhindi masala,,,1,Manually added
+biryani,,,1,Manually added
+butter chicken,,,1,Manually added
+chaat,,,1,Manually added
+chana masala,,,1,Manually added
+chapati,,,1,Manually added
+chicken razala,,,1,Manually added
+chicken tikka,,,1,Manually added
+chicken tikka masala,,,1,Manually added
+chole bhature,,,1,Manually added
+daal baati�churma,,,1,Manually added
+daal puri,,,1,Manually added
+dal makhani�(kali dal),,,1,Manually added
+dal fara,,,1,Manually added
+dal,,,1,Manually added
+dal�fry with�tadka,,,1,Manually added
+dum aloo,,,1,Manually added
+poha,,,1,Manually added
+fara,,,1,Manually added
+firni,,,1,Manually added
+french bean aloo,,,1,Manually added
+gajar ka halwa,,,1,Manually added
+gajar matar aloo,,,1,Manually added
+gobhi matar,,,1,Manually added
+imarti,,,1,Manually added
+hari mutter ka nimona (green peas daal),,,1,Manually added
+jalebi,,,1,Manually added
+jaleba,,,1,Manually added
+kachori,,,1,Manually added
+kadai�paneer,,,1,Manually added
+kadhi�pakoda,,,1,Manually added
+karela bharta,,,1,Manually added
+katha meetha petha / halwakadoo,,,1,Manually added
+kheer,,,1,Manually added
+khichdi,,,1,Manually added
+kofta,,,1,Manually added
+kulfi�falooda,,,1,Manually added
+lauki ke kofte,,,1,Manually added
+lauki ki subji,,,1,Manually added
+litti chokha,,,1,Manually added
+"makki di roti,�sarson da saag",,,1,Manually added
+mathura ke pede,,,1,Manually added
+"methi�saag, chaulai saab",,,1,Manually added
+misi roti,,,1,Manually added
+mixed vegetable,,,1,Manually added
+moong dal ka halwa,,,1,Manually added
+murgh musallam,,,1,Manually added
+mushroom do pyaza,,,1,Manually added
+mushroom matar,,,1,Manually added
+naan,,,1,Manually added
+navrattan korma,,,1,Manually added
+pakhala,,,1,Manually added
+palak paneer,,,1,Manually added
+paneer butter masala,,,1,Manually added
+paneer tikka masala,,,1,Manually added
+pani puri,,,1,Manually added
+panjeeri,,,1,Manually added
+papad,,,1,Manually added
+paratha,,,1,Manually added
+pattor,,,1,Manually added
+phirni,,,1,Manually added
+pindi chana,,,1,Manually added
+pinni,,,1,Manually added
+rajma chaval,,,1,Manually added
+rajma,,,1,Manually added
+ramatori subji,,,1,Manually added
+rongi,,,1,Manually added
+samosa,,,1,Manually added
+samose,,,1,Manually added
+sattu ki roti,,,1,Manually added
+shahi paneer,,,1,Manually added
+shahi tukra,,,1,Manually added
+singhada halwa,,,1,Manually added
+sooji�halwa,,,1,Manually added
+sweet pethas / kesar petha / pista petha,,,1,Manually added
+vegetable�jalfrezi,,,1,Manually added
+tandoori chicken,,,1,Manually added
+tandoori fish tikka,,,1,Manually added
+attu,,,1,Manually added
+avial,,,1,Manually added
+halwa,,,1,Manually added
+biryani,,,1,Manually added
+bisi bele bath,,,1,Manually added
+bonda,,,1,Manually added
+chettinadu chicken,,,1,Manually added
+chicken 65,,,1,Manually added
+currivepillai sadam,,,1,Manually added
+dibba rotti,,,1,Manually added
+dosa,,,1,Manually added
+double ka meetha,,,1,Manually added
+ennai kathirikkai,,,1,Manually added
+goli bajje,,,1,Manually added
+idiappam,,,1,Manually added
+idli,,,1,Manually added
+indian omelette,,,1,Manually added
+kaara kozhambu,,,1,Manually added
+kanji,,,1,Manually added
+keerai kootu,,,1,Manually added
+keerai masiyal,,,1,Manually added
+keerai�poriyal,,,1,Manually added
+keerai sadam,,,1,Manually added
+kerala beef fry,,,1,Manually added
+koottu,,,1,Manually added
+kori rotti,,,1,Manually added
+kos kootu,,,1,Manually added
+koshambri,,,1,Manually added
+kothamali sadam,,,1,Manually added
+kuzhakkattai,,,1,Manually added
+kuzhambu,,,1,Manually added
+masala dosa,,,1,Manually added
+nandu omelette,,,1,Manually added
+obbattu,,,1,Manually added
+holige,,,1,Manually added
+bobbattu,,,1,Manually added
+pooran-poli,,,1,Manually added
+olan,,,1,Manually added
+pachadi,,,1,Manually added
+paniyaram,,,1,Manually added
+papadum,,,1,Manually added
+paravannam,,,1,Manually added
+parotta,,,1,Manually added
+paruppu sadam,,,1,Manually added
+payasam,,,1,Manually added
+pesarattu,,,1,Manually added
+pongal,,,1,Manually added
+poriyal,,,1,Manually added
+puli sadam,,,1,Manually added
+puttu,,,1,Manually added
+ragi mudhe,,,1,Manually added
+rasam,,,1,Manually added
+sajjige,,,1,Manually added
+sakkara pongal,,,1,Manually added
+sambar,,,1,Manually added
+sandige,,,1,Manually added
+sevai,,,1,Manually added
+sevai�lunch,,,1,Manually added
+thayir sadam,,,1,Manually added
+mosaranna,,,1,Manually added
+theeyal,,,1,Manually added
+thengai sadam,,,1,Manually added
+uttapam,,,1,Manually added
+vada,,,1,Manually added
+varuval,,,1,Manually added
+wheat�upma,,,1,Manually added
+yelumincham sadam,,,1,Manually added
+chitranna,,,1,Manually added
+amti,,,1,Manually added
+zunka,,,1,Manually added
+pitla,,,1,Manually added
+kolim,,,1,Manually added
+jawla,,,1,Manually added
+saath,,,1,Manually added
+naralachi vadi,,,1,Manually added
+khobryachi vadi,,,1,Manually added
+coconut vadi,,,1,Manually added
+bajri no rotlo,,,1,Manually added
+modak,,,1,Manually added
+barfi,,,1,Manually added
+basundi,,,1,Manually added
+bhakri,,,1,Manually added
+karanji,,,1,Manually added
+bombil fry,,,1,Manually added
+chaat,,,1,Manually added
+chakri,,,1,Manually added
+chakali,,,1,Manually added
+chevdo,,,1,Manually added
+cholafali,,,1,Manually added
+chorafali,,,1,Manually added
+copra paak,,,1,Manually added
+daal dhokli,,,1,Manually added
+dabeli,,,1,Manually added
+dahi vada,,,1,Manually added
+dalithoy,,,1,Manually added
+dhokla,,,1,Manually added
+doodhpak,,,1,Manually added
+dudhi no halwo,,,1,Manually added
+dum aaloo,,,1,Manually added
+pohe,,,1,Manually added
+gajar halwo,,,1,Manually added
+gatta curry,,,1,Manually added
+ghari,,,1,Manually added
+ghooghra,,,1,Manually added
+gud papdi,,,1,Manually added
+gol papdi,,,1,Manually added
+gulab jamun,,,1,Manually added
+halvasan,,,1,Manually added
+handwo,,,1,Manually added
+gur,,,1,Manually added
+jalebi,,,1,Manually added
+jeera aloo,,,1,Manually added
+juvar no rotlo,,,1,Manually added
+kansar,,,1,Manually added
+keri no ras,,,1,Manually added
+khakhra,,,1,Manually added
+khandvi,,,1,Manually added
+kombdi vade,,,1,Manually added
+koshimbir,,,1,Manually added
+laapsi,,,1,Manually added
+laddu,,,1,Manually added
+locha,,,1,Manually added
+malpua,,,1,Manually added
+methi na gota,,,1,Manually added
+modak,,,1,Manually added
+mohanthal,,,1,Manually added
+muthiya,,,1,Manually added
+oondees,,,1,Manually added
+panipuri,,,1,Manually added
+patra,,,1,Manually added
+pav bhaji,,,1,Manually added
+penda,,,1,Manually added
+pooran-poli,,,1,Manually added
+puri,,,1,Manually added
+puri bhaji,,,1,Manually added
+rasya muthia,,,1,Manually added
+sabudana khichadi,,,1,Manually added
+sev khamani,,,1,Manually added
+sev tameta,,,1,Manually added
+shakarpara,,,1,Manually added
+namakpara,,,1,Manually added
+shankarpali,,,1,Manually added
+shiro,,,1,Manually added
+shrikhand,,,1,Manually added
+sohan papdi,,,1,Manually added
+soonvali,,,1,Manually added
+sukhdi,,,1,Manually added
+surnoli,,,1,Manually added
+sutarfeni,,,1,Manually added
+thalipeeth,,,1,Manually added
+undhiyu,,,1,Manually added
+upmaa,,,1,Manually added
+vada pav,,,1,Manually added
+veg kolhapuri,,,1,Manually added
+vindaloo,,,1,Manually added
+ghebar or�ghevar,,,1,Manually added
+lilva�kachori,,,1,Manually added
+maghaz,,,1,Manually added
+undhiyu,,,1,Manually added
+mag dhokli,,,1,Manually added
+khichu,,,1,Manually added
+thepla,,,1,Manually added
+farsi puri,,,1,Manually added
+khaman,,,1,Manually added
+turiya patra vatana sabji,,,1,Manually added
+mohan thaal,,,1,Manually added
+churma ladoo,,,1,Manually added
