@@ -66,15 +66,17 @@ def look_up(search, search_db, output_file):
             search_array.append(line)
 
     column = ['word', 'freq']
-    X = pandas.read_csv(search_db, names=column)
+    X = pandas.read_csv(search_db, names=column, delimiter=',')
     Y = X[X['word'].isin(search_array)]
     Y.to_csv(output_file, index=False, header=False)
+    Y['freq'] = Y['freq'].astype(int)
+
     ax = Y.plot(legend=True, title='Popular dish names occurrence')
     ax.set_xlabel('Dish names', fontsize=12)
     ax.set_ylabel('Frequency', fontsize=12)
     plt.show()
 
-    Y = Y[Y.freq > 5]
+    Y = Y[Y.freq > 25]
     Y = Y.sort_values('freq')
     Y.head(len(Y))
     ch = chartify.Chart(blank_labels=True, x_axis_type='linear', y_axis_type='categorical', layout='slide_2000%')
@@ -131,14 +133,14 @@ def word_frequency_bigram(input_file, output, output_file):
     fdist = nltk.FreqDist(bgs)
     string = ''
     for word, frequency in fdist.most_common():
-        string += u'{},{}\n'.format(' '.join(word), frequency)
+        string += u'{},{}\n'.format(' '.join(word), int(frequency))
 
     write_to_file(output, output_file, string)
     print('done: word_frequency_bigram')
 
 
 if __name__ == '__main__':
-    method = 'word_frequency_bigram'
+    method = 'lookup_and_visualize_bigram'
 
     if method == 'word_frequency_unigram':
         input_filename = 'Indian_comments.txt'
@@ -150,8 +152,17 @@ if __name__ == '__main__':
         output_path = 'outputpath'
         output_filename = 'word_frequency_reviews_bigram.csv'
         word_frequency_bigram(input_filename, output_path, output_filename)
-    elif method == 'lookup_and_visualize':
-        search_input = 'student_dn_annotations.txt'
-        output_filename = 'outputpath/student_dn_annotations_freq.csv'
+    elif method == 'lookup_and_visualize_unigram':
+        # search_input = 'student_dn_annotations.txt'
+        # output_filename = 'outputpath/student_dn_annotations_freq.csv'
+        search_input = 'indian_dishnames_task3.txt'
+        output_filename = 'outputpath/indian_dishnames_task3_freq.csv'
         search_database = 'outputpath/word_frequency_reviews.csv'
+        look_up(search_input, search_database, output_filename)
+    elif method == 'lookup_and_visualize_bigram':
+        # search_input = 'student_dn_annotations.txt'
+        # output_filename = 'outputpath/student_dn_annotations_freq_bigram.csv'
+        search_input = 'indian_dishnames_task3.txt'
+        output_filename = 'outputpath/indian_dishnames_task3_freq_bigram.csv'
+        search_database = 'outputpath/word_frequency_reviews_bigram.csv'
         look_up(search_input, search_database, output_filename)

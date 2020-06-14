@@ -44,7 +44,7 @@ if __name__ == '__main__':
     type = 'analyse'
     inputPath = 'Indian_comments.txt'
     modelPath = 'model'
-    labelPath = 'indian_label_tab.csv'
+    labelPath = 'indian_label_tab.txt'
 
     if type == 'train':
         sentences = Sentences(inputPath)
