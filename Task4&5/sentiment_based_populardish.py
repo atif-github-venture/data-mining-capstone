@@ -2,6 +2,8 @@ import datetime
 import json
 import pickle
 import re
+
+import chartify
 import numpy as np
 import metapy
 import nltk
@@ -188,7 +190,7 @@ def process_review(doc):
 def sentiment_analysis_based_popular_dish(inputfile):
     print('begin classification')
 
-    column = ['restaurant_id', 'restaurant_rating', 'review_text', 'review_rating']
+    column = ['restaurant_id', 'restaurant_name', 'restaurant_rating', 'review_text', 'review_rating']
     dataset = pandas.read_csv(inputfile, delimiter=',', names=column)
 
     dataset = dataset[dataset['restaurant_id'].notnull()]
@@ -201,16 +203,17 @@ def sentiment_analysis_based_popular_dish(inputfile):
     dataset['review_rating'] = dataset['review_rating'].astype(int)
 
     from sklearn.utils import shuffle
-    df = shuffle(dataset)
+    # df = shuffle(dataset)
+    df = dataset
     stemmer = nltk.PorterStemmer()
     words = stopwords.words("english")
     df['cleaned'] = df['review_text'].apply(
         lambda x: " ".join([stemmer.stem(i) for i in re.sub("[^a-zA-Z]", " ", x).split() if i not in words]).lower())
 
-    vectorizer = TfidfVectorizer(min_df=3, stop_words="english", sublinear_tf=True, norm='l2', ngram_range=(1, 2))
+    vectorizer = TfidfVectorizer(min_df=1, stop_words="english", sublinear_tf=True, norm='l2', ngram_range=(1, 1))
     X = df['cleaned']
     Y = df['review_rating']
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.55)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=123)
     # instead of doing these steps one at a time, we can use a pipeline to complete them all at once
     pipeline = Pipeline([('vect', vectorizer),
                          ('chi', SelectKBest(chi2, k=1200)),
@@ -230,8 +233,44 @@ def sentiment_analysis_based_popular_dish(inputfile):
     print('classification done for input file')
 
 
+def dish_sent_freq_to_graph():
+    # this is used after sentiment.py
+    # removed few repetitive  data
+    dataset = pandas.read_csv('outputpath/dish_senti.csv', names=['dish', 'freq', 'senti'])
+    Y = dataset.sort_values('freq')
+    Y = Y[Y.freq > 20]
+    Y.head(len(Y))
+    ch = chartify.Chart(blank_labels=True, x_axis_type='linear', y_axis_type='categorical', layout='slide_2000%')
+    ch.set_title("Popular Dishes based on sentiments")
+    ch.set_subtitle('By sentiment (color based on sentiments [1 - 5])')
+    ch.plot.bar(
+        data_frame=Y,
+        categorical_columns=['dish'],
+        numeric_column='freq',
+        color_column='senti',
+        categorical_order_ascending=True
+    )
+
+    ch.plot.text(
+        data_frame=Y,
+        categorical_columns=['dish'],
+        numeric_column='freq',
+        text_column='freq',
+        color_column='senti',
+        # font_size='1em',
+    )
+
+    ch.axes.set_xaxis_label('Frequency --->')
+    ch.axes.set_yaxis_label('Dish Names --->')
+    ch.style.set_color_palette('categorical', 'Dark2')
+    ch.axes.set_xaxis_tick_orientation('horizontal')
+    ch.axes.set_yaxis_tick_orientation('horizontal')
+    ch.set_legend_location(None)
+    ch.show()
+
 st_time = datetime.datetime.now()
-process_restaurant_review_rating()
+# process_restaurant_review_rating()
 # sentiment_analysis_based_popular_dish(outputfile)
+dish_sent_freq_to_graph()
 en_time = datetime.datetime.now()
 print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))
