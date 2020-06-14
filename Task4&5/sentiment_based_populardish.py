@@ -23,6 +23,7 @@ outputfile = 'outputpath/flat_review_per_restaurant_with_rating.csv'
 
 
 def process_restaurant_review_rating():
+    rid2name = {}
     categories = set([])
     restaurant_ids = set([])
     cat2rid = {}
@@ -51,10 +52,11 @@ def process_restaurant_review_rating():
                                 cat2rid[cat].append(business_json['business_id'])
                             else:
                                 cat2rid[cat] = [business_json['business_id']]
+                            rid2name[business_json['business_id']] = business_json['name']
     f.close()
 
     print('extraction done for restaurants and respective start rating for -> ' + target_cuisine)
-    # important rest2rate
+    # important rest2rate, rid2name
     with open(path2reviews, 'r') as f:
         for line in f.readlines():
             review_json = json.loads(line)
@@ -74,8 +76,13 @@ def process_restaurant_review_rating():
         for line in f.readlines():
             review_json = json.loads(line)
             rid = review_json['business_id']
+            try:
+                rname = rid2name[rid]
+            except:
+                rname = ''
             if rid in rest2rate:
-                if review_json['text'] != '' or review_json['text'] is not None or rest2rate[rid] != '' or rest2rate[
+                if review_json['text'] != '' or review_json['text'] is not None or rname != '' or rest2rate[
+                    rid] != '' or rest2rate[
                     rid] is not None or review_json['stars'] != '' or review_json['stars'] is not None:
                     text = review_json['text'].replace('\n', '')
                     text = text.strip()
@@ -84,13 +91,14 @@ def process_restaurant_review_rating():
                     text = text.replace('\'', '')
                     text = text.replace('.', '')
                     info_list.append(
-                        ','.join([rid, str(int(rest2rate[rid])), text,
+                        ','.join([rid, rname, str(int(rest2rate[rid])), text,
                                   str(review_json['stars'])]))
     f.close()
     with open(outputfile, 'w') as f:
         for item in info_list:
             f.write(item + '\n')
-    print('done writing csv file for “restaurant_id” , “restaurant_rating”, “review_text” and “review_rating”')
+    print(
+        'done writing csv file for “restaurant_id” , "restaurant_name", “restaurant_rating”, “review_text” and “review_rating”')
 
 
 def document_features(document, word_feature):
@@ -178,7 +186,6 @@ def process_review(doc):
 #     print('classification done for input file')
 
 def sentiment_analysis_based_popular_dish(inputfile):
-
     print('begin classification')
 
     column = ['restaurant_id', 'restaurant_rating', 'review_text', 'review_rating']
@@ -224,8 +231,7 @@ def sentiment_analysis_based_popular_dish(inputfile):
 
 
 st_time = datetime.datetime.now()
-column = ['name', 'label']
-# process_restaurant_review_rating()
-sentiment_analysis_based_popular_dish(outputfile)
+process_restaurant_review_rating()
+# sentiment_analysis_based_popular_dish(outputfile)
 en_time = datetime.datetime.now()
 print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))

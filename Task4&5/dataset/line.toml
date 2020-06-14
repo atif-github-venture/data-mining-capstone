@@ -1,0 +1,5 @@
+type = "line-corpus"
+data = {name = "content", type = "string"}
+#data = [{name = "id", type = "string"}, {name = "content", type = "string"}]
+encoding = "utf-8"
+store-full-text = true
