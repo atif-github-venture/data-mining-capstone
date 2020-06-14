@@ -2,6 +2,8 @@ import datetime
 import chartify
 import metapy
 import pandas
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 path2files = "../data/"
 path2buisness = path2files + "yelp_academic_dataset_business.json"
@@ -95,25 +97,65 @@ def search_dish_name_restaurant_review():
     ranker = metapy.index.OkapiBM25()
     query = metapy.index.Document()
     query.content('chicken tikka')
-    top_docs = ranker.score(idx, query, num_results=25)
+    top_docs = ranker.score(idx, query, num_results=100)
     print(top_docs)
-    for num, (d_id, _) in enumerate(top_docs):
-        print(idx.metadata(d_id).get('content'))
-    print('*****************')
-    # sns.barplot(x="Restaurant_Name", y="Average_Sentiment", data=top10_B, alpha=0.8)
-    # plt.xticks(rotation=65, horizontalalignment='right')
-    # plt.title('Ranking By Average Sentiment', fontsize=18)
-    # plt.xlabel('Restaurant Name', fontsize=14)
-    # plt.ylabel('Restaurant Average Sentiment (for variations on Tikka Masala)', fontsize=14)
-    # plt.show()
 
+    with open('outputpath/search_ranking_chicken_tikka.csv', 'w') as f:
+        for item in top_docs:
+            f.write(str(item[0])+','+str(item[1])+'\n')
+    f.close()
+    # for num, (d_id, _) in enumerate(top_docs):
+    #     print(idx.metadata(d_id).get('content'))
+    print('*****************')
     print('end search_dish_name_restaurant_review')
 
 
+def plot_per_search(inputfile):
+    print('begin plot_per_search')
+    column = ['restaurant_name', 'review_text', 'avg_rating', 'number_of_reviews']
+    dataset = pandas.read_csv(inputfile, delimiter=',', names=column)
+
+    rest_name = []
+    rest_score = []
+    column = ['document_index', 'score']
+    documentset = pandas.read_csv('outputpath/search_ranking_chicken_tikka.csv', delimiter=',', names=column)
+    for i , item in documentset.iterrows():
+        search = item['document_index']
+        for i , dataset_item in dataset.iterrows():
+            if i == int(search):
+                rest_name.append(dataset_item['restaurant_name'])
+                rest_score.append(item['score'])
+
+    with open('outputpath/search_ranking_chicken_tikka_restname.csv', 'w') as f:
+        for i in range(len(rest_name)):
+            f.write('{},{}\n'.format(rest_name[i], rest_score[i]))
+    f.close()
+
+    column = ['restaurant_name', 'score']
+    Y = pandas.read_csv('outputpath/search_ranking_chicken_tikka_restname.csv', delimiter=',', names=column)
+    Y['score'] = Y['score'].astype(float)
+    Y = Y.sort_values('score')
+    Y = Y[Y.score > 1]
+    Y.head(len(Y))
+    sns.barplot(x="restaurant_name", y="score", data=Y, alpha=0.8)
+    plt.xticks(rotation=65, horizontalalignment='right')
+    plt.title('Ranking by document scoring algorithm', fontsize=18)
+    plt.xlabel('Restaurant names\n(for "chicken tikka" dish)', fontsize=14)
+    plt.ylabel('Document scores', fontsize=14)
+    plt.show()
+
+    print('end plot_per_search')
+
+
+
+
+
+
+    print('end plot_per_search')
+
 st_time = datetime.datetime.now()
 # review_text_per_restaurant(outputfile)
-search_dish_name_restaurant_review()
+# search_dish_name_restaurant_review()
+plot_per_search('outputpath/rest_review_avg_rat.csv')
 en_time = datetime.datetime.now()
 print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))
-
-
