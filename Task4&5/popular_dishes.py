@@ -15,7 +15,6 @@ from utils import write_to_file
 
 def build_collection(doc, filename):
     tok = metapy.analyzers.ICUTokenizer(suppress_tags=True)
-    tok = metapy.analyzers.LengthFilter(tok, min=1, max=3)
     tok = metapy.analyzers.LowercaseFilter(tok)
     tok = metapy.analyzers.ListFilter(tok, 'outputpath/' + filename,
                                       metapy.analyzers.ListFilter.Type.Reject)
