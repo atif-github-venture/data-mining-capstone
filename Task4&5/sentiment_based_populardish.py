@@ -233,6 +233,64 @@ def sentiment_analysis_based_popular_dish(inputfile):
     print('classification done for input file')
 
 
+def vader_sentiment_forPopular_restaurants():
+    # for "chickken tikka"
+
+    def sentiment_analyzer_scores(restname, sentence):
+        score = analyser.polarity_scores(sentence)
+        print("{} -> {}".format(restname, str(score)))
+        return score
+
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    analyser = SentimentIntensityAnalyzer()
+    # sentiment_analyzer_scores("The phone is super cool.")
+    column = ['restaurant_name', 'review_text', 'average_rating', 'number_of_reviews']
+    dataset = pandas.read_csv('outputpath/rest_review_avg_rat.csv', delimiter=',', names=column)
+
+    with open('outputpath/popular_dish_vader.csv', 'w') as f:
+        for i, item in dataset.iterrows():
+            scored = sentiment_analyzer_scores(item['restaurant_name'], item['review_text'])
+            f.write('{},{},{},{},{},{}\n'.format(item['restaurant_name'], item['average_rating'], scored['neg'],
+                                                 scored['neu'], scored['pos'], scored['compound']))
+
+    f.close()
+
+
+def restaurant_vader_sent_freq_to_graph():
+    dataset = pandas.read_csv('outputpath/popular_dish_vader.csv',
+                              names=['restaurant_name', 'avg_rating', 'neg', 'neu', 'pos', 'compound'])
+    Y = dataset.sort_values('avg_rating')
+    Y = Y[Y.avg_rating > 4.25]
+    Y.head(len(Y))
+    ch = chartify.Chart(blank_labels=True, x_axis_type='linear', y_axis_type='categorical', layout='slide_2000%')
+    ch.set_title('Popular restaurant based on sentiments ("Chicken tikka")')
+    ch.set_subtitle('By sentiment (color based on vader positive aspect sentiments [0 - 1])')
+    ch.plot.bar(
+        data_frame=Y,
+        categorical_columns=['restaurant_name'],
+        numeric_column='avg_rating',
+        color_column='pos',
+        categorical_order_ascending=True
+    )
+
+    ch.plot.text(
+        data_frame=Y,
+        categorical_columns=['restaurant_name'],
+        numeric_column='avg_rating',
+        text_column='avg_rating',
+        color_column='pos',
+        # font_size='1em',
+    )
+
+    ch.axes.set_xaxis_label('Average rating --->')
+    ch.axes.set_yaxis_label('Restaurant Names --->')
+    ch.style.set_color_palette('categorical', 'Dark2')
+    ch.axes.set_xaxis_tick_orientation('horizontal')
+    ch.axes.set_yaxis_tick_orientation('horizontal')
+    ch.set_legend_location(None)
+    ch.show()
+
+
 def dish_sent_freq_to_graph():
     # this is used after sentiment.py
     # removed few repetitive  data
@@ -268,9 +326,12 @@ def dish_sent_freq_to_graph():
     ch.set_legend_location(None)
     ch.show()
 
+
 st_time = datetime.datetime.now()
 # process_restaurant_review_rating()
 # sentiment_analysis_based_popular_dish(outputfile)
-dish_sent_freq_to_graph()
+# dish_sent_freq_to_graph()
+# vader_sentiment_forPopular_restaurants()
+restaurant_vader_sent_freq_to_graph()
 en_time = datetime.datetime.now()
 print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))
