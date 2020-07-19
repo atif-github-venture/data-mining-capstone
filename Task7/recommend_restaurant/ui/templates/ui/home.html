@@ -1,0 +1,182 @@
+{% extends "ui/base.html" %}
+{% block body_block %}
+<script>
+    $(document).ready(function () {
+        // Read value on page load
+        $("#result b").html($("#customRange").val());
+
+        // Read value on change
+        $("#customRange").change(function () {
+            $("#result b").html($(this).val());
+        });
+    });
+</script>
+<div class="jumbotron">
+    <h1 class="display-7">Indian cuisine restaurant recommendation</h1>
+    <p class="lead">
+        This project is an outcome of Data mining capstone at UIUC. Here you can expect to have a user interface to
+        interact to get some insight on the restaurant recommendations based on either average rating or by search
+        algorithm. The data set used here is from provided YELP data set by course, cleaned and arranged suitable for
+        this task.
+    </p>
+    <hr class="my-4">
+    <p>Please be patient while the data is processed for the visualization, for there could be a max lag of 45 seconds
+        depending on input request.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="https://github.com/atif-github-venture/data-mining-capstone"
+           role="button">GitHub - learn more</a>
+    </p>
+</div>
+<div class="jumbotron" style="background:grey;">
+    <p style="font-weight: bold;">Make a desired selection for recommendation</p>
+    <form method="GET" id="searchtype">
+        <fieldset class="form-group">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="searchtype" id="optionsRadios1"
+                           value="searchtype1"
+                           onclick="this.form.submit()"
+                           {% if "searchtype1" in searchtype %} checked="checked" {% endif %}>
+                    By Average Rating
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="searchtype" id="optionsRadios2"
+                           value="searchtype2"
+                           onclick="this.form.submit()"
+                           {% if "searchtype2" in searchtype %} checked="checked" {% endif %}>
+                    By Sentiment
+                </label>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% if "searchtype1" in searchtype %}
+<div class="jumbotron" style="background:grey;">
+    <form method="post" id="postdish" name="postdish">
+        <label>Dish Name</label>
+        <br>
+        <div class="form-check-inline" id="dishname_selected">
+            <select id="dishname" class="custom-select" name="dishname">
+                <option selected="">Select a dish</option>
+                {% for dishname in dishnames %}
+                <option value="{{dishname}}">
+                    {{dishname|capfirst}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <br>
+        <label>Result Size</label>
+        <br>
+        <div class="form-check-inline">
+            <select class="custom-select" name="result_size" id="result_size">
+                <option selected="">Select result size</option>
+                <option value="5" selected="selected">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="form-check-inline">
+            <fieldset class="form-group">
+                <label for="customRange">Average Rating</label>
+                <input type="range" class="custom-range" id="customRange" name="customRange" min="1" max="5"
+                       step="0.1">
+                <div id="result">Averaging rating selected: <b></b></div>
+            </fieldset>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success" name="submit">Submit</button>
+    </form>
+    <br>
+    <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
+    <div>
+        {% autoescape off %}
+        {{ plot_div }}
+        {% endautoescape %}
+    </div>
+</div>
+{% endif %}
+{% if "searchtype2" in searchtype %}
+<div class="jumbotron" style="background:grey;">
+    <form method="post" id="postdish1" name="postdish1">
+        <label>Dish Name</label>
+        <br>
+        <div class="form-check-inline" id="dishname_selected1">
+            <select id="dishname1" class="custom-select" name="dishname">
+                <option selected="">Select a dish</option>
+                {% for dishname in dishnames %}
+                <option value="{{dishname}}">
+                    {{dishname|capfirst}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <br>
+        <label>Result Size</label>
+        <br>
+        <div class="form-check-inline">
+            <select class="custom-select" name="result_size" id="result_size1">
+                <option selected="">Select result size</option>
+                <option value="5" selected="selected">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="form-check-inline">
+            <fieldset class="form-group">
+                <label for="customRange">Average Rating</label>
+                <input type="range" class="custom-range" id="customRange" name="customRange" min="1" max="5"
+                       step="0.1">
+                <div id="result">Averaging rating selected: <b></b></div>
+            </fieldset>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success" name="submit">Submit</button>
+    </form>
+    <br>
+    <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
+    <div>
+        {% autoescape off %}
+        {{ plot_div }}
+        {% endautoescape %}
+    </div>
+<!--    {% if vader_result %}-->
+    <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
+    <p>Additional Info: Based on Vader Sentiment Analysis</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Restaurant</th>
+            <th scope="col">Negative</th>
+            <th scope="col">Neutral</th>
+            <th scope="col">Positive</th>
+            <th scope="col">Compound</th>
+        </tr>
+        </thead>
+        {% for item in vader_result %}
+        <tbody>
+        <tr class="table-info">
+            {% for val in item %}
+            <td>{{val}}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+<!--    {% endif %}-->
+</div>
+{% endif %}
+<br><br>
+{% endblock %}
