@@ -21,7 +21,8 @@
     </p>
     <hr class="my-4">
     <p>Please be patient while the data is processed for the visualization, for there could be a max lag of 45 seconds
-        depending on input request.</p>
+        depending on input request. Average setting should show greater than set value and till the point of max result
+        set.</p>
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="https://github.com/atif-github-venture/data-mining-capstone"
            role="button">GitHub - learn more</a>
@@ -152,7 +153,7 @@
         {{ plot_div }}
         {% endautoescape %}
     </div>
-<!--    {% if vader_result %}-->
+    <!--    {% if vader_result %}-->
     <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
     <p>Additional Info: Based on Vader Sentiment Analysis</p>
     <table class="table table-hover">
@@ -175,7 +176,7 @@
         </tbody>
         {% endfor %}
     </table>
-<!--    {% endif %}-->
+    <!--    {% endif %}-->
 </div>
 {% endif %}
 <br><br>
