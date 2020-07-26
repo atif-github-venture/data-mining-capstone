@@ -102,6 +102,27 @@
         {{ plot_div }}
         {% endautoescape %}
     </div>
+    <!--    {% if addr %}-->
+    <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
+    <p>Address Information</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Restaurant Name</th>
+            <th scope="col">Address</th>
+        </tr>
+        </thead>
+        {% for item in addr %}
+        <tbody>
+        <tr class="table-warning">
+            {% for val in item %}
+            <td>{{val}}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <!--    {% endif %}-->
 </div>
 {% endif %}
 {% if "searchtype2" in searchtype %}
@@ -177,6 +198,28 @@
         {% endfor %}
     </table>
     <!--    {% endif %}-->
+    <!--    {% if addr %}-->
+    <hr style="margin-bottom: 1rem;border-top: 1px solid yellow;">
+    <p>Address Information</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Restaurant Name</th>
+            <th scope="col">Address</th>
+        </tr>
+        </thead>
+        {% for item in addr %}
+        <tbody>
+        <tr class="table-warning">
+            {% for val in item %}
+            <td>{{val}}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <!--    {% endif %}-->
+
 </div>
 {% endif %}
 <br><br>

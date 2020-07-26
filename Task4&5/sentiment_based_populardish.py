@@ -31,6 +31,7 @@ def process_restaurant_review_rating():
     cat2rid = {}
     rest2rate = {}
     rest2revID = {}
+    rest2address = {}
     r = 'Restaurants'
     target_cuisine = 'Indian'
     print('filtering for a single cuisine -> ' + target_cuisine)
@@ -47,6 +48,7 @@ def process_restaurant_review_rating():
                         categories = set(bjc).union(categories) - set([r])
                         stars = business_json['stars']
                         rest2rate[business_json['business_id']] = stars
+                        rest2address[business_json['business_id']] = business_json['full_address']
                         for cat in bjc:
                             if cat == r:
                                 continue
@@ -94,13 +96,13 @@ def process_restaurant_review_rating():
                     text = text.replace('.', '')
                     info_list.append(
                         ','.join([rid, rname, str(int(rest2rate[rid])), text,
-                                  str(review_json['stars'])]))
+                                  str(review_json['stars']), rest2address[rid].replace('\n', ' ').replace(',', '')]))
     f.close()
     with open(outputfile, 'w') as f:
         for item in info_list:
             f.write(item + '\n')
     print(
-        'done writing csv file for “restaurant_id” , "restaurant_name", “restaurant_rating”, “review_text” and “review_rating”')
+        'done writing csv file for “restaurant_id” , "restaurant_name", “restaurant_rating”, “review_text” and “review_rating” and "address"')
 
 
 def document_features(document, word_feature):
@@ -328,10 +330,10 @@ def dish_sent_freq_to_graph():
 
 
 st_time = datetime.datetime.now()
-# process_restaurant_review_rating()
+process_restaurant_review_rating()
 # sentiment_analysis_based_popular_dish(outputfile)
 # dish_sent_freq_to_graph()
 # vader_sentiment_forPopular_restaurants()
-restaurant_vader_sent_freq_to_graph()
+# restaurant_vader_sent_freq_to_graph()
 en_time = datetime.datetime.now()
 print('Total execution time (milliseconds): ' + str((en_time - st_time).total_seconds() * 1000))

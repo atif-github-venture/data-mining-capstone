@@ -26,7 +26,7 @@ SECRET_KEY = '3h&fp^=j98q*+e7-!+n!frjmazz2s46nfj@g(*@5aq3(2)^niy'
 # DEBUG = eval((os.environ['DEBUG']))
 DEBUG = True
 
-ALLOWED_HOSTS = ['161.35.205.51', 'django.local', '127.0.0.1', 'localhost', '0.0.0.0']
+ALLOWED_HOSTS = ['134.122.113.211', 'django.local', '127.0.0.1', 'localhost', '0.0.0.0']
 STATIC_URL = '/static/'
 
 
